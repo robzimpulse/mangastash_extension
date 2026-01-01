@@ -3,9 +3,8 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:html/dom.dart';
 
 import '../base.dart';
-import '../extension.dart';
 
-class MangaClashGetMangaUseCase extends GetDataUseCase<Manga> {
+class MangaClashGetMangaUseCase implements GetDataUseCase<Manga> {
   @override
   Future<Manga> parse({required Document root, BaseCacheManager? cache}) async {
     final description = root

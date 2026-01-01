@@ -5,7 +5,7 @@ import 'package:html/dom.dart';
 import '../base.dart';
 import '../extension.dart';
 
-class MangaClashSearchChapterUseCase extends SearchChapterExternalUseCase {
+class MangaClashSearchChapterUseCase implements SearchChapterExternalUseCase {
 
   @override
   Future<List<Chapter>> parse({

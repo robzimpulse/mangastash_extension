@@ -5,7 +5,7 @@ import 'package:html/dom.dart';
 import '../base.dart';
 import '../extension.dart';
 
-class AsuraScanSearchChapterUseCase extends SearchChapterExternalUseCase {
+class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
   @override
   Future<List<Chapter>> parse({
     required Document root,

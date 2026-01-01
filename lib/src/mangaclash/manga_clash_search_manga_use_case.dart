@@ -5,7 +5,7 @@ import 'package:manga_dex_api/manga_dex_api.dart';
 
 import '../base.dart';
 
-class MangaClashSearchMangaUseCase extends SearchMangaExternalUseCase {
+class MangaClashSearchMangaUseCase implements SearchMangaExternalUseCase {
   @override
   Future<List<Manga>> parse({
     required Document root,

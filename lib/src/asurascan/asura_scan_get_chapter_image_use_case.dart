@@ -4,7 +4,7 @@ import 'package:html/dom.dart';
 
 import '../base.dart';
 
-class AsuraScanGetChapterImageUseCase extends GetDataUseCase<List<String>> {
+class AsuraScanGetChapterImageUseCase implements GetDataUseCase<List<String>> {
   @override
   Future<List<String>> parse({
     required Document root,

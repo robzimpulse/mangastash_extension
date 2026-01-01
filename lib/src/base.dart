@@ -9,7 +9,7 @@ abstract class Source {
   String get baseUrl;
 
   GetDataUseCase<Manga> get getMangaUseCase;
-  GetDataUseCase<String> get getChapterImageUseCase;
+  GetDataUseCase<List<String>> get getChapterImageUseCase;
 
   SearchMangaExternalUseCase get searchMangaUseCase;
   SearchChapterExternalUseCase get searchChapterUseCase;

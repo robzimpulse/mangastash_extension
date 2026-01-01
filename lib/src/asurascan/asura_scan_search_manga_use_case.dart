@@ -5,7 +5,7 @@ import 'package:manga_dex_api/manga_dex_api.dart';
 
 import '../base.dart';
 
-class AsuraScanSearchMangaUseCase extends SearchMangaExternalUseCase {
+class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {
   @override
   Future<bool?> haveNextPage({
     required Document root,
