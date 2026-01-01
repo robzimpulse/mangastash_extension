@@ -6,7 +6,6 @@ import '../base.dart';
 import '../extension.dart';
 
 class AsuraScanSearchChapterUseCase extends SearchChapterExternalUseCase {
-
   @override
   Future<List<Chapter>> parse({
     required Document root,
@@ -72,6 +71,7 @@ class AsuraScanSearchChapterUseCase extends SearchChapterExternalUseCase {
           chapter: '${chapter ?? url?.split('/').lastOrNull}',
           readableAt: await releaseDate?.asDateTime(manager: cache),
           webUrl: ['https://asuracomic.net', 'series', url].join('/'),
+          // TODO: remove source enum
           scanlationGroup: SourceEnum.asurascan.label,
         ),
       );

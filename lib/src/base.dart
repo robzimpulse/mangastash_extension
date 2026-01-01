@@ -8,14 +8,14 @@ abstract class Source {
   String get iconUrl;
   String get baseUrl;
 
-  GetDataExternalUseCase<Manga> get getMangaUseCase;
-  GetDataExternalUseCase<Chapter> get getChapterUseCase;
+  GetDataUseCase<Manga> get getMangaUseCase;
+  GetDataUseCase<Chapter> get getChapterUseCase;
 
   SearchMangaExternalUseCase get searchMangaUseCase;
   SearchChapterExternalUseCase get searchChapterUseCase;
 }
 
-abstract class GetDataExternalUseCase<T> {
+abstract class GetDataUseCase<T> {
   List<String> get scripts;
   Future<T> parse({required Document root, BaseCacheManager? cache});
 }
