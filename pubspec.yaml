@@ -1,7 +1,7 @@
 name: mangastash_extension
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+publish_to: none
 
 environment:
   sdk: ^3.8.1
@@ -9,6 +9,12 @@ environment:
 # Add regular dependencies here.
 dependencies:
   dart_eval: ^0.8.2
+
+  manga_dex_api:
+    git:
+      url: https://github.com/robzimpulse/mangastash
+      ref: master
+      path: module/library/manga_dex_api
 
 dev_dependencies:
   lints: ^5.0.0
