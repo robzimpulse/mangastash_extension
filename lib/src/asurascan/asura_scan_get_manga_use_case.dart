@@ -57,7 +57,6 @@ class AsuraScanGetMangaUseCase extends GetDataUseCase<Manga> {
   }
 
   @override
-  // TODO: implement scripts
   List<String> get scripts {
     final selector = [
       'button',
