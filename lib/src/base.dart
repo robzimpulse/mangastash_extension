@@ -1,0 +1,36 @@
+import 'package:entity_manga/entity_manga.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:html/dom.dart';
+import 'package:manga_dex_api/manga_dex_api.dart';
+
+abstract class Source {
+  String get name;
+  String get iconUrl;
+  String get baseUrl;
+
+  GetDataExternalUseCase<Manga> get getMangaUseCase;
+  GetDataExternalUseCase<Chapter> get getChapterUseCase;
+
+  SearchMangaExternalUseCase get searchMangaUseCase;
+  SearchChapterExternalUseCase get searchChapterUseCase;
+}
+
+abstract class GetDataExternalUseCase<T> {
+  List<String> get scripts;
+  Future<T> parse({required Document root, BaseCacheManager? cache});
+}
+
+abstract class SearchMangaExternalUseCase {
+  List<String> get scripts;
+  String url({required SearchMangaParameter parameter});
+  Future<List<Manga>> parse({required Document root, BaseCacheManager? cache});
+  Future<bool?> haveNextPage({required Document root, BaseCacheManager? cache});
+}
+
+abstract class SearchChapterExternalUseCase {
+  List<String> get scripts;
+  Future<List<Chapter>> parse({
+    required Document root,
+    BaseCacheManager? cache,
+  });
+}
