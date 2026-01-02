@@ -21,12 +21,26 @@ dependencies:
       url: https://github.com/robzimpulse/mangastash
       ref: master
       path: module/library/manga_dex_api
-
   entity_manga:
     git:
       url: https://github.com/robzimpulse/mangastash
       ref: master
       path: module/entity/entity_manga
+  log_box:
+    git:
+      url: https://github.com/robzimpulse/log_box.git
+      ref: master
+      path: packages/log_box
+  log_box_dio_logger:
+    git:
+      url: https://github.com/robzimpulse/log_box.git
+      ref: master
+      path: packages/log_box_dio_logger
+  log_box_in_app_webview_logger:
+    git:
+      url: https://github.com/robzimpulse/log_box.git
+      ref: master
+      path: packages/log_box_in_app_webview_logger
 
 dev_dependencies:
   lints: ^5.0.0
