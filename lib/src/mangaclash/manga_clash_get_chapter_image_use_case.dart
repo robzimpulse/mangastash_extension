@@ -4,7 +4,7 @@ import 'package:html/dom.dart';
 
 import '../base.dart';
 
-class MangaClashGetChapterImageUseCase implements GetDataUseCase<List<String>> {
+class MangaClashGetChapterImageUseCase implements GetChapterImageUseCase {
   @override
   Future<List<String>> parse({
     required Document root,

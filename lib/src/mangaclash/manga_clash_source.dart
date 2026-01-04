@@ -19,12 +19,12 @@ class MangaClashSource implements Source {
   String get name => 'Manga Clash';
 
   @override
-  GetDataUseCase<List<String>> get getChapterImageUseCase {
+  GetChapterImageUseCase get getChapterImageUseCase {
     return MangaClashGetChapterImageUseCase();
   }
 
   @override
-  GetDataUseCase<Manga> get getMangaUseCase {
+  GetMangaUseCase get getMangaUseCase {
     return MangaClashGetMangaUseCase();
   }
 

@@ -17,12 +17,12 @@ class AsuraScanSource implements Source {
   String get name => 'Asura Scans';
 
   @override
-  GetDataUseCase<List<String>> get getChapterImageUseCase {
+  GetChapterImageUseCase get getChapterImageUseCase {
     return AsuraScanGetChapterImageUseCase();
   }
 
   @override
-  GetDataUseCase<Manga> get getMangaUseCase {
+  GetMangaUseCase get getMangaUseCase {
     return AsuraScanGetMangaUseCase();
   }
 

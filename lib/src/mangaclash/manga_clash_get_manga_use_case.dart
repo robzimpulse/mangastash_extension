@@ -4,7 +4,7 @@ import 'package:html/dom.dart';
 
 import '../base.dart';
 
-class MangaClashGetMangaUseCase implements GetDataUseCase<Manga> {
+class MangaClashGetMangaUseCase implements GetMangaUseCase {
   @override
   Future<Manga> parse({required Document root, BaseCacheManager? cache}) async {
     final description = root

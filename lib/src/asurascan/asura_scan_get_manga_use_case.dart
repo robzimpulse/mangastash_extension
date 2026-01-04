@@ -5,7 +5,7 @@ import 'package:html/dom.dart';
 import '../base.dart';
 import '../extension.dart';
 
-class AsuraScanGetMangaUseCase implements GetDataUseCase<Manga> {
+class AsuraScanGetMangaUseCase implements GetMangaUseCase {
   @override
   Future<Manga> parse({required Document root, BaseCacheManager? cache}) async {
     final query = ['div', 'float-left', 'relative', 'z-0'].join('.');
