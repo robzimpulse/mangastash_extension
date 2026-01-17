@@ -10,7 +10,6 @@ environment:
 dependencies:
   dart_eval: ^0.8.2
   html: ^0.15.5
-  flutter_cache_manager: ^3.3.1
   intl: ^0.19.0
   change_case: ^2.2.0
   collection: ^1.16.0
@@ -20,13 +19,13 @@ dependencies:
   manga_dex_api:
     git:
       url: https://github.com/robzimpulse/mangastash
-      ref: dependency_adjustment
+      ref: decouple-external-source
       path: module/library/manga_dex_api
-  entity_manga:
+  entity_manga_external:
     git:
       url: https://github.com/robzimpulse/mangastash
-      ref: dependency_adjustment
-      path: module/entity/entity_manga
+      ref: decouple-external-source
+      path: module/library/entity_manga_external
 
 dev_dependencies:
   lints: ^5.0.0

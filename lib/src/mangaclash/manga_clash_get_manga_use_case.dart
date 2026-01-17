@@ -1,12 +1,8 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
-
-import '../base.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
 class MangaClashGetMangaUseCase implements GetMangaUseCase {
   @override
-  Future<Manga> parse({required Document root, BaseCacheManager? cache}) async {
+  Future<MangaScrapped> parse({required HtmlDocument root}) async {
     final description = root
         .querySelector('div.description-summary')
         ?.querySelectorAll('p')
@@ -28,20 +24,12 @@ class MangaClashGetMangaUseCase implements GetMangaUseCase {
         .trim()
         .split(',');
 
-    return Manga(
+    return MangaScrapped(
       title: title,
       author: authors,
       coverUrl: coverUrl,
       description: description,
-      tags: [
-        ...?tags?.map(
-          (e) => Tag(
-            name: e.trim(),
-            // TODO: remove source enum
-            source: SourceEnum.mangaclash.name,
-          ),
-        ),
-      ],
+      tags: tags?.toList(),
     );
   }
 

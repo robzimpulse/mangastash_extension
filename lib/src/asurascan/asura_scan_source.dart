@@ -1,12 +1,12 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:mangastash_extension/src/asurascan/asura_scan_get_chapter_image_use_case.dart';
-import 'package:mangastash_extension/src/asurascan/asura_scan_get_manga_use_case.dart';
-import 'package:mangastash_extension/src/asurascan/asura_scan_search_chapter_use_case.dart';
-import 'package:mangastash_extension/src/asurascan/asura_scan_search_manga_use_case.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
-import '../base.dart';
+import 'asura_scan_get_chapter_image_use_case.dart';
+import 'asura_scan_get_manga_use_case.dart';
+import 'asura_scan_search_chapter_use_case.dart';
+import 'asura_scan_search_manga_use_case.dart';
 
-class AsuraScanSource implements Source {
+
+class AsuraScanSource implements SourceExternal {
   @override
   String get baseUrl => 'https://asuracomic.net';
 

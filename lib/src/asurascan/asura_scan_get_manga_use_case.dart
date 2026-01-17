@@ -1,13 +1,8 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
-
-import '../base.dart';
-import '../extension.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
 class AsuraScanGetMangaUseCase implements GetMangaUseCase {
   @override
-  Future<Manga> parse({required Document root, BaseCacheManager? cache}) async {
+  Future<MangaScrapped> parse({required HtmlDocument root}) async {
     final query = ['div', 'float-left', 'relative', 'z-0'].join('.');
     final region = root.querySelector(query);
 
@@ -39,20 +34,12 @@ class AsuraScanGetMangaUseCase implements GetMangaUseCase {
         ?.querySelector('img')
         ?.attributes['src'];
 
-    return Manga(
+    return MangaScrapped(
       title: title,
       author: author,
       description: description,
       coverUrl: coverUrl,
-      tags: [
-        ...?genres?.map(
-          (e) => Tag(
-            name: e.toLowerCase(),
-            // TODO: remove source enum
-            source: SourceEnum.mangaclash.label,
-          ),
-        ),
-      ],
+      tags: genres?.toList(),
     );
   }
 

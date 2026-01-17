@@ -1,14 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
-
-import '../base.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
 class AsuraScanGetChapterImageUseCase implements GetChapterImageUseCase {
   @override
   Future<List<String>> parse({
-    required Document root,
-    BaseCacheManager? cache,
+    required HtmlDocument root,
   }) async {
     final region = root.querySelector(
       'div.py-8.-mx-5.flex.flex-col.items-center.justify-center',

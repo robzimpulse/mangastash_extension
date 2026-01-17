@@ -1,17 +1,10 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 import 'package:manga_dex_api/manga_dex_api.dart';
-
-import '../base.dart';
 
 class MangaClashSearchMangaUseCase implements SearchMangaExternalUseCase {
   @override
-  Future<List<Manga>> parse({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
-    final List<Manga> mangas = [];
+  Future<List<MangaScrapped>> parse({required HtmlDocument root}) async {
+    final List<MangaScrapped> mangas = [];
     for (final element in root.querySelectorAll('.c-tabs-item__content')) {
       final title = element.querySelector('div.post-title')?.text.trim();
       final webUrl = element
@@ -37,12 +30,12 @@ class MangaClashSearchMangaUseCase implements SearchMangaExternalUseCase {
           .trim();
 
       mangas.add(
-        Manga(
+        MangaScrapped(
           title: title,
           coverUrl: coverUrl,
           webUrl: webUrl,
           status: status?.toLowerCase(),
-          tags: genres?.map((e) => Tag(name: e.toLowerCase())).toList(),
+          tags: genres?.toList(),
         ),
       );
     }
@@ -50,10 +43,7 @@ class MangaClashSearchMangaUseCase implements SearchMangaExternalUseCase {
   }
 
   @override
-  Future<bool?> haveNextPage({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
+  Future<bool?> haveNextPage({required HtmlDocument root}) async {
     final values = root
         .querySelector('.wp-pagenavi')
         ?.querySelector('.pages')

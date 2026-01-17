@@ -1,15 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
-
-import '../base.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
 class MangaClashGetChapterImageUseCase implements GetChapterImageUseCase {
   @override
-  Future<List<String>> parse({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
+  Future<List<String>> parse({required HtmlDocument root}) async {
     final region = root.querySelector('.reading-content');
     final containers = region?.querySelectorAll('img') ?? [];
     final List<(num, String)> data = [];

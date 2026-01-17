@@ -1,16 +1,10 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 import 'package:html/dom.dart';
 import 'package:manga_dex_api/manga_dex_api.dart';
 
-import '../base.dart';
-
 class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {
   @override
-  Future<bool?> haveNextPage({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
+  Future<bool?> haveNextPage({required Document root}) async {
     final queries = [
       'a',
       'flex',
@@ -28,16 +22,13 @@ class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {
   }
 
   @override
-  Future<List<Manga>> parse({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
+  Future<List<MangaScrapped>> parse({required Document root}) async {
     final queries = ['div', 'grid', 'grid-cols-2', 'gap-3', 'p-4'].join('.');
     final region = root.querySelector(queries)?.querySelectorAll('a') ?? [];
     return [
       ...region.map((e) {
         final status = e.querySelector('span.status.bg-blue-700')?.text.trim();
-        return Manga(
+        return MangaScrapped(
           title: e.querySelector('span.block.font-bold')?.text.trim(),
           coverUrl: e.querySelector('img.rounded-md')?.attributes['src'],
           webUrl: ['https://asuracomic.net', e.attributes['href']].join('/'),

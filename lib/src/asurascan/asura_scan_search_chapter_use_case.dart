@@ -1,16 +1,9 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 import 'package:html/dom.dart';
-
-import '../base.dart';
-import '../extension.dart';
 
 class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
   @override
-  Future<List<Chapter>> parse({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
+  Future<List<ChapterScrapped>> parse({required HtmlDocument root}) async {
     final region = root.querySelector(
       [
         'div',
@@ -25,7 +18,7 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
       ].join('.'),
     );
 
-    final List<Chapter> data = [];
+    final List<ChapterScrapped> data = [];
     for (final element in region?.children ?? <Element>[]) {
       final url = element.querySelector('a')?.attributes['href'];
 
@@ -66,13 +59,13 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
           .replaceAll('th', '');
 
       data.add(
-        Chapter(
+        ChapterScrapped(
           title: title?.isNotEmpty == true ? title : null,
           chapter: '${chapter ?? url?.split('/').lastOrNull}',
-          readableAt: await releaseDate?.asDateTime(manager: cache),
+          readableAt: releaseDate,
           webUrl: ['https://asuracomic.net', 'series', url].join('/'),
-          // TODO: remove source enum
-          scanlationGroup: SourceEnum.asurascan.label,
+          // // TODO: remove source enum
+          // scanlationGroup: SourceEnum.asurascan.label,
         ),
       );
     }

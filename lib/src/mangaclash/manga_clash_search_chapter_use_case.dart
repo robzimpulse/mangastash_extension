@@ -1,18 +1,9 @@
-import 'package:entity_manga/entity_manga.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:html/dom.dart';
-
-import '../base.dart';
-import '../extension.dart';
+import 'package:entity_manga_external/entity_manga_external.dart';
 
 class MangaClashSearchChapterUseCase implements SearchChapterExternalUseCase {
-
   @override
-  Future<List<Chapter>> parse({
-    required Document root,
-    BaseCacheManager? cache,
-  }) async {
-    final List<Chapter> data = [];
+  Future<List<ChapterScrapped>> parse({required HtmlDocument root}) async {
+    final List<ChapterScrapped> data = [];
 
     for (final element in root.querySelectorAll('li.wp-manga-chapter')) {
       final url = element.querySelector('a')?.attributes['href'];
@@ -35,10 +26,10 @@ class MangaClashSearchChapterUseCase implements SearchChapterExternalUseCase {
       final chapter = text?.nonNulls.firstOrNull;
 
       data.add(
-        Chapter(
+        ChapterScrapped(
           title: title?.trim(),
           chapter: chapter != null ? '$chapter' : null,
-          readableAt: await releaseDate?.asDateTime(manager: cache),
+          readableAt: releaseDate,
           webUrl: url,
         ),
       );
