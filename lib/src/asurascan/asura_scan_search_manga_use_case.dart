@@ -4,7 +4,7 @@ import 'package:manga_dex_api/manga_dex_api.dart';
 
 class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {
   @override
-  Future<bool?> haveNextPage({required Document root}) async {
+  Future<bool?> haveNextPage({required HtmlDocument root}) async {
     final queries = [
       'a',
       'flex',
@@ -22,7 +22,7 @@ class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {
   }
 
   @override
-  Future<List<MangaScrapped>> parse({required Document root}) async {
+  Future<List<MangaScrapped>> parse({required HtmlDocument root}) async {
     final queries = ['div', 'grid', 'grid-cols-2', 'gap-3', 'p-4'].join('.');
     final region = root.querySelector(queries)?.querySelectorAll('a') ?? [];
     return [
