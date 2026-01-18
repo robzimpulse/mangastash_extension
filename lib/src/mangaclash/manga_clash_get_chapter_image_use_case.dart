@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:entity_manga_external/entity_manga_external.dart';
 
 class MangaClashGetChapterImageUseCase implements GetChapterImageUseCase {
@@ -15,7 +14,8 @@ class MangaClashGetChapterImageUseCase implements GetChapterImageUseCase {
       if (index == null || url == null) continue;
       data.add((index, url.trim()));
     }
-    return data.sortedBy((e) => e.$1).map((e) => e.$2).toList();
+    data.sort((a, b) => a.$1.compareTo(b.$1));
+    return data.map((e) => e.$2).toList();
   }
 
   @override

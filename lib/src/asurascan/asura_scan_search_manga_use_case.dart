@@ -1,5 +1,4 @@
 import 'package:entity_manga_external/entity_manga_external.dart';
-import 'package:html/dom.dart';
 import 'package:manga_dex_api/manga_dex_api.dart';
 
 class AsuraScanSearchMangaUseCase implements SearchMangaExternalUseCase {

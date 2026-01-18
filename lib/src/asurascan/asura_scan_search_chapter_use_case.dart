@@ -1,5 +1,4 @@
 import 'package:entity_manga_external/entity_manga_external.dart';
-import 'package:html/dom.dart';
 
 class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
   @override
@@ -18,11 +17,9 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
       ].join('.'),
     );
 
-    final List<ChapterScrapped> data = [];
-    for (final element in region?.children ?? <Element>[]) {
-      final url = element.querySelector('a')?.attributes['href'];
-
-      final container = element.querySelector(
+    final elements = region?.children.map((e) {
+      final url = e.querySelector('a')?.attributes['href'];
+      final container = e.querySelector(
         [
           'h3',
           'text-sm',
@@ -37,7 +34,7 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
       final title = spans?.firstOrNull?.text.trim();
       final isNotPublished = spans?.lastOrNull?.hasChildNodes() == true;
 
-      if (isNotPublished) continue;
+      if (isNotPublished) return null;
 
       final chapterData = container?.nodes.firstOrNull?.text?.trim().split(' ');
       final chapter = chapterData?.map((text) {
@@ -49,7 +46,7 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
         return int.tryParse(text);
       }).lastOrNull;
 
-      final releaseDate = element
+      final releaseDate = e
           .querySelector('h3.text-xs')
           ?.text
           .trim()
@@ -58,19 +55,15 @@ class AsuraScanSearchChapterUseCase implements SearchChapterExternalUseCase {
           .replaceAll('rd', '')
           .replaceAll('th', '');
 
-      data.add(
-        ChapterScrapped(
-          title: title?.isNotEmpty == true ? title : null,
-          chapter: '${chapter ?? url?.split('/').lastOrNull}',
-          readableAt: releaseDate,
-          webUrl: ['https://asuracomic.net', 'series', url].join('/'),
-          // // TODO: remove source enum
-          // scanlationGroup: SourceEnum.asurascan.label,
-        ),
+      return ChapterScrapped(
+        title: title?.isNotEmpty == true ? title : null,
+        chapter: '${chapter ?? url?.split('/').lastOrNull}',
+        readableAt: releaseDate,
+        webUrl: ['https://asuracomic.net', 'series', url].join('/'),
       );
-    }
+    });
 
-    return data;
+    return [...?elements?.nonNulls];
   }
 
   @override
