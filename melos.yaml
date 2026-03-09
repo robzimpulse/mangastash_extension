@@ -1,0 +1,87 @@
+name: mangastash_extension
+
+packages:
+  - "module/**"
+  - "."
+
+ide:
+  intellij:
+    enabled: true
+
+scripts:
+
+  refresh:
+    description: Refresh all packages dependencies.
+    run: melos clean && melos clean:flutter && melos clean:coverage && melos bs && melos get
+
+  clean:coverage:
+    description: Clean coverage folders for all packages.
+    run: rm -rf coverage
+    exec:
+      concurrency: 5
+    packageFilters:
+      dirExists: "coverage"
+
+  clean:flutter:
+    description: Flutter clean for all packages.
+    run: flutter clean
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+
+  get:
+    description: Get dependencies for all packages.
+    run: flutter pub get
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+
+  gen:build_runner:
+    description: Generate files for all packages.
+    run: flutter pub run build_runner build --delete-conflicting-outputs
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+    packageFilters:
+      dependsOn: "build_runner"
+
+  gen:migration:
+    description: Generate migration files for drift packages.
+    run: flutter pub run drift_dev make-migrations
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+    packageFilters:
+      dependsOn: "drift_dev"
+
+  gen:dart_eval:bind:
+    description: Generate dart_eval bind files for dynamic linking packages.
+    run: flutter pub run dart_eval bind
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+    packageFilters:
+      dependsOn: "dart_eval"
+
+  gen:dart_eval:compile:
+    description: Generate dart_eval .evc files for compiled packages.
+    run: flutter pub run dart_eval compile -o program.evc
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
+    packageFilters:
+      dependsOn: "dart_eval"
+
+  upgrade:
+    description: Upgrade dependencies for all packages.
+    run: flutter pub upgrade
+    exec:
+      concurrency: 5
+      failFast: true
+      orderDependents: true
