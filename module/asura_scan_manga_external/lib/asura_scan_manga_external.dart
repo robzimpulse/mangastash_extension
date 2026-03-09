@@ -1,6 +1,8 @@
 import 'package:entity_manga_external/entity_manga_external.dart';
 import 'package:manga_dex_api/manga_dex_api.dart';
 
+SourceExternal main() => AsuraScanSource();
+
 class AsuraScanSource implements SourceExternal {
   @override
   String get baseUrl => 'https://asuracomic.net';
