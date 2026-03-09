@@ -84,6 +84,7 @@ fabric.properties
 .dart_tool/
 .packages
 build/
+compiled/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 

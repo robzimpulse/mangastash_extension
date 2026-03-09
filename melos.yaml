@@ -70,7 +70,11 @@ scripts:
 
   gen:dart_eval:compile:
     description: Generate dart_eval .evc files for compiled packages.
-    run: flutter pub run dart_eval compile -o program.evc
+    run: |
+      mkdir -p MELOS_ROOT_PATH/compiled
+      flutter pub run dart_eval compile -o MELOS_PACKAGE_NAME.evc
+      cp MELOS_PACKAGE_NAME.evc MELOS_ROOT_PATH/compiled/MELOS_PACKAGE_NAME.evc
+      rm -rf MELOS_PACKAGE_NAME.evc
     exec:
       concurrency: 5
       failFast: true

@@ -1,0 +1,30 @@
+name: Compile Bytecode
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Git Checkout'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.ref }}
+
+      - name: 'Install Flutter'
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.8'
+          # ref: https://github.com/subosito/flutter-action/issues/350
+          cache: true
+
+      - name: 'Install Melos'
+        run: dart pub global activate melos 6.2.0
+
+      - name: 'Compile Bytecode'
+        run: melos gen:dart_eval:compile
